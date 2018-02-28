@@ -32,8 +32,8 @@ public protocol Tradable {
 public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
-    var name: String { get set }
-    var detail: String { get set }
+    var title: String { get set }
+    var body: String { get set }
     var seller: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var skus: ReferenceCollection<SKU> { get }
