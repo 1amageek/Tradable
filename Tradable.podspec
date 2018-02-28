@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Tradable"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Firestore trade framework"
   s.description  = <<-DESC
 Tradable is a library for doing business.
@@ -20,7 +20,8 @@ Tradable is a library for doing business.
   s.source_files  = "Tradable/**/*.swift"
   s.requires_arc = true
   s.static_framework = true
-  s.dependency "Firebase"
-  s.dependency "Firebase/Auth"
   s.dependency "Pring"
+  s.dependency "Firebase/Core"
+  s.dependency "Firebase/Firestore"
+  s.dependency "Firebase/Auth"
 end
