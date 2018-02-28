@@ -7,6 +7,7 @@
 //
 
 import FirebaseFirestore
+import FirebaseAuth
 import Pring
 
 public protocol UserProtocol: Document {
