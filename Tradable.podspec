@@ -20,7 +20,7 @@ Tradable is a library for doing business.
   s.source_files  = "Tradable/**/*.swift"
   s.requires_arc = true
   s.static_framework = true
-  s.dependency "Firebase/Core"
+  s.dependency "Firebase"
   s.dependency "Firebase/Firestore"
   s.dependency "Firebase/Storage"
   s.dependency "Firebase/Auth"

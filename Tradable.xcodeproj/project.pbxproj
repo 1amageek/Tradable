@@ -10,6 +10,7 @@
 		12448C4D2046B21400CE2CE0 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12448C4C2046B21400CE2CE0 /* Product.swift */; };
 		12448C4F2046B25100CE2CE0 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12448C4E2046B25100CE2CE0 /* Asset.swift */; };
 		12448C512046C1DE00CE2CE0 /* Tradable.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 12448C502046C1DE00CE2CE0 /* Tradable.podspec */; };
+		12448C532046C80900CE2CE0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12448C522046C80900CE2CE0 /* GoogleService-Info.plist */; };
 		125096EC2043FD4E00C7FF17 /* TradableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125096EB2043FD4E00C7FF17 /* TradableTests.swift */; };
 		125096EE2043FD4E00C7FF17 /* Tradable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12DFEF0E20433842000EB3D3 /* Tradable.framework */; };
 		125096F52043FD6200C7FF17 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125096F42043FD6200C7FF17 /* Test.swift */; };
@@ -41,6 +42,7 @@
 		12448C4C2046B21400CE2CE0 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		12448C4E2046B25100CE2CE0 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		12448C502046C1DE00CE2CE0 /* Tradable.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Tradable.podspec; sourceTree = "<group>"; };
+		12448C522046C80900CE2CE0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		125096E92043FD4E00C7FF17 /* TradableTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradableTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		125096EB2043FD4E00C7FF17 /* TradableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradableTests.swift; sourceTree = "<group>"; };
 		125096ED2043FD4E00C7FF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		125096EA2043FD4E00C7FF17 /* TradableTests */ = {
 			isa = PBXGroup;
 			children = (
+				12448C522046C80900CE2CE0 /* GoogleService-Info.plist */,
 				125096EB2043FD4E00C7FF17 /* TradableTests.swift */,
 				125096F42043FD6200C7FF17 /* Test.swift */,
 				125096F62043FD7200C7FF17 /* User.swift */,
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12448C512046C1DE00CE2CE0 /* Tradable.podspec in Resources */,
+				12448C532046C80900CE2CE0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
