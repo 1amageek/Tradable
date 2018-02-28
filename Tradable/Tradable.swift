@@ -29,24 +29,14 @@ public protocol Tradable {
     var orders: ReferenceCollection<Order> { get }
 }
 
-public protocol AssetProtocol: Document {
-    associatedtype Person: UserProtocol
-    associatedtype SKU: SKUProtocol
-    var createdBy: Relation<Person> { get set }
-    var photo: File? { get set }
-    var movie: File? { get set }
-}
-
 public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
-    associatedtype Asset: AssetProtocol
     var name: String { get set }
     var detail: String { get set }
     var seller: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var skus: ReferenceCollection<SKU> { get }
-    var assets: ReferenceCollection<Asset> { get }
 }
 
 public extension ProductProtocol where Self: Object, SKU: Object, Person: Object {
