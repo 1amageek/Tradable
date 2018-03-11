@@ -34,7 +34,7 @@ public protocol ProductProtocol: Document {
     associatedtype Person: UserProtocol
     var title: String { get set }
     var body: String { get set }
-    var seller: Relation<Person> { get set }
+    var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var skus: ReferenceCollection<SKU> { get }
 }
@@ -71,7 +71,7 @@ public extension Tradable where Self: Object, Product: Object, Order: Object, Pe
             print("[Tradable] error: SKU is required for the product.")
             return
         }
-        product.seller.set(Person(id: self.id, value: [:]))
+        product.selledBy.set(Person(id: self.id, value: [:]))
         product.skus.forEach { (sku) in
             self.skus.insert(sku)
         }
@@ -95,10 +95,11 @@ public enum StockValue: String {
 public protocol SKUProtocol: Document {
     associatedtype Person: UserProtocol
     associatedtype Product: ProductProtocol
-    var seller: Relation<Person> { get set }
+    var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var currency: Currency { get set }
     var product: Relation<Product> { get set }
+    var name: String { get set }
     var price: Double { get set }
     var stockType: StockType { get set }
     var stockQuantity: Int { get set }
@@ -120,7 +121,7 @@ public protocol OrderItemProtocol: Document {
     associatedtype Person: UserProtocol
     var order: Relation<Order> { get set }
     var buyer: Relation<Person> { get set }
-    var seller: Relation<Person> { get set }
+    var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }    // OrderItemType
     var sku: Relation<SKU> { get }
     var quantity: Int { get set }
@@ -134,7 +135,7 @@ public protocol OrderProtocol: Document {
     associatedtype Address: AddressProtocol
     var parentID: String? { get set }
     var buyer: Relation<Person> { get set }
-    var seller: Relation<Person> { get set }
+    var selledBy: Relation<Person> { get set }
     var shippingTo: Address? { get set }
     var paidAt: Date? { get set }
     var expirationDate: Date { get set }

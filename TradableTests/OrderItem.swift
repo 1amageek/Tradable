@@ -24,7 +24,7 @@ extension Test {
 
         var buyer: Relation<Test.User> = .init()
 
-        var seller: Relation<Test.User> = .init()
+        var selledBy: Relation<Test.User> = .init()
 
         var type: OrderItemType = .sku
 

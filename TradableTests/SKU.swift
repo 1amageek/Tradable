@@ -18,7 +18,7 @@ extension Test {
 
         typealias Person = Test.User
 
-        var seller: Relation<Test.User> = .init()
+        var selledBy: Relation<Test.User> = .init()
 
         var createdBy: Relation<Test.User> = .init()
 
@@ -27,6 +27,8 @@ extension Test {
         dynamic var currency: Currency = .JPY
 
         dynamic var price: Double = 0
+
+        dynamic var name: String = ""
 
         dynamic var stockType: StockType = .finite
 

@@ -11,17 +11,17 @@ import Pring
 
 extension Test {
 
-    @objcMembers
-    class Asset: Object, AssetProtocol {
-
-        typealias Person = Test.User
-
-        typealias SKU = Test.SKU
-
-        var createdBy: Relation<Person> = .init()
-
-        dynamic var photo: File?
-
-        dynamic var movie: File?
-    }
+//    @objcMembers
+//    class Asset: Object, AssetProtocol {
+//
+//        typealias Person = Test.User
+//
+//        typealias SKU = Test.SKU
+//
+//        var createdBy: Relation<Person> = .init()
+//
+//        dynamic var photo: File?
+//
+//        dynamic var movie: File?
+//    }
 }

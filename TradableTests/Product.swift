@@ -18,19 +18,15 @@ extension Test {
 
         typealias Person = Test.User
 
-        typealias Asset = Test.Asset
+        dynamic var title: String = ""
 
-        dynamic var name: String = ""
+        dynamic var body: String = ""
 
-        dynamic var detail: String = ""
-
-        dynamic var seller: Relation<Test.User> = .init()
+        dynamic var selledBy: Relation<Test.User> = .init()
 
         dynamic var createdBy: Relation<Test.User> = .init()
 
         dynamic var skus: ReferenceCollection<Test.SKU> = []
-
-        dynamic var assets: ReferenceCollection<Test.Asset> = .init()
-
+        
     }
 }
