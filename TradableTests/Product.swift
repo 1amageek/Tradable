@@ -20,7 +20,7 @@ extension Test {
 
         dynamic var title: String = ""
 
-        dynamic var body: String = ""
+        dynamic var body: String?
 
         dynamic var selledBy: Relation<Test.User> = .init()
 

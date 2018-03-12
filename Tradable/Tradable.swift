@@ -33,7 +33,7 @@ public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
     var title: String { get set }
-    var body: String { get set }
+    var body: String? { get set }
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var skus: ReferenceCollection<SKU> { get }
