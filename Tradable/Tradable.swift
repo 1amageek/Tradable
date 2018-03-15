@@ -33,7 +33,6 @@ public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
     var title: String { get set }
-    var body: String? { get set }
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var skus: ReferenceCollection<SKU> { get }
@@ -126,7 +125,6 @@ public protocol OrderItemProtocol: Document {
     var sku: Relation<SKU> { get }
     var quantity: Int { get set }
     var amount: Double { get set }
-    var desc: String? { get set }
 }
 
 public protocol OrderProtocol: Document {
