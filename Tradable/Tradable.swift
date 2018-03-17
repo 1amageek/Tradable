@@ -22,7 +22,6 @@ public protocol Tradable {
     associatedtype Product: ProductProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
-    var name: String { get set }
     var isAvailabled: Bool { get set }
     var products: ReferenceCollection<Product> { get }
     var skus: ReferenceCollection<Product.SKU> { get }
@@ -91,6 +90,37 @@ public enum StockValue: String {
     case outOfStock = "out_of_stock"
 }
 
+public struct Inventory {
+    var type: StockType
+    var value: StockValue?
+    var quantity: Int = 0
+
+    static func encode(_ key: String, value: Any?) -> [String: Any] {
+        var endoedValue: [String: Any] = [:]
+        if let inventory: Inventory = value as? Inventory {
+            endoedValue["stockType"] = inventory.type.rawValue
+            if let value: StockValue = inventory.value {
+                endoedValue["stockValue"] = value.rawValue
+            }
+            endoedValue["quantity"] = inventory.quantity
+        }
+        return endoedValue
+    }
+
+    static func decode(_ key: String, value: Any?) -> Inventory {
+        let inventory: [String: Any] = value as! [String: Any]
+        let type: String = inventory["stockType"] as! String
+        let quantity: Int = inventory["quantity"] as! Int
+        var decodeValue: Inventory = Inventory(type: StockType(rawValue: type)!,
+                                               value: nil,
+                                               quantity: quantity)
+        if let value: String = inventory["value"] as? String {
+            decodeValue.value = StockValue(rawValue: value)
+        }
+        return decodeValue
+    }
+}
+
 public protocol SKUProtocol: Document {
     associatedtype Person: UserProtocol
     associatedtype Product: ProductProtocol
@@ -100,9 +130,10 @@ public protocol SKUProtocol: Document {
     var product: Relation<Product> { get set }
     var name: String { get set }
     var price: Double { get set }
-    var stockType: StockType { get set }
-    var stockQuantity: Int { get set }
-    var stockValue: StockValue { get set }
+    var inventory: Inventory { get set }
+//    var stockType: StockType { get set }
+//    var stockQuantity: Int { get set }
+//    var stockValue: StockValue { get set }
     var isPublished: Bool { get set }
     var isActived: Bool { get set }
 }
@@ -112,6 +143,31 @@ public enum OrderItemType: String {
     case tax        = "tax"
     case shipping   = "shipping"
     case discount   = "discount"
+}
+
+public enum OrderStatus: String {
+    case unknown = "unknown"
+
+    /// Immediately after the order made
+    case created = "created"
+
+    /// Inventory processing was done, but it was rejected
+    case rejected = "rejected"
+
+    /// Inventory processing was successful
+    case received = "received"
+
+    /// Payment was successful
+    case paid = "paid"
+
+    /// Successful inventory processing but payment failed.
+    case waitingForPayment = "waitingForPayment"
+
+    /// If payment was made, I failed in refunding.
+    case waitingForRefund = "waitingForRefund"
+
+    /// Everything including refunds was canceled. Inventory processing is not canceled
+    case canceled = "canceled"
 }
 
 public protocol OrderItemProtocol: Document {
@@ -139,5 +195,6 @@ public protocol OrderProtocol: Document {
     var expirationDate: Date { get set }
     var currency: Currency { get set }
     var amount: Double { get set }
-    var items: ReferenceCollection<OrderItem> { get set }
+    var items: NestedCollection<OrderItem> { get set }
+    var status: OrderStatus { get set }
 }

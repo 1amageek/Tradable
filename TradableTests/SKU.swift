@@ -30,14 +30,31 @@ extension Test {
 
         dynamic var name: String = ""
 
-        dynamic var stockType: StockType = .finite
+        dynamic var inventory: Inventory = Inventory(type: .finite, value: nil, quantity: 0)
 
-        dynamic var stockQuantity: Int = 0
-
-        dynamic var stockValue: StockValue = .limited
+//        dynamic var stockType: StockType = .finite
+//
+//        dynamic var stockQuantity: Int = 0
+//
+//        dynamic var stockValue: StockValue = .limited
 
         dynamic var isPublished: Bool = false
 
         dynamic var isActived: Bool = false
+
+        override func encode(_ key: String, value: Any?) -> Any? {
+            if key == "inventory" {
+                return Inventory.encode(key, value: value)
+            }
+            return nil
+        }
+
+        override func decode(_ key: String, value: Any?) -> Bool {
+            if key == "inventory" {
+                self.inventory = Inventory.decode(key, value: value)
+                return true
+            }
+            return false
+        }
     }
 }
