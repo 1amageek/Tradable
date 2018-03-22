@@ -91,11 +91,12 @@ public enum StockValue: String {
 }
 
 public struct Inventory {
-    var type: StockType
-    var value: StockValue?
-    var quantity: Int = 0
 
-    static func encode(_ key: String, value: Any?) -> [String: Any] {
+    public var type: StockType
+    public var value: StockValue?
+    public var quantity: Int = 0
+
+    public static func encode(_ key: String, value: Any?) -> [String: Any] {
         var endoedValue: [String: Any] = [:]
         if let inventory: Inventory = value as? Inventory {
             endoedValue["stockType"] = inventory.type.rawValue
@@ -107,7 +108,7 @@ public struct Inventory {
         return endoedValue
     }
 
-    static func decode(_ key: String, value: Any?) -> Inventory {
+    public static func decode(_ key: String, value: Any?) -> Inventory {
         let inventory: [String: Any] = value as! [String: Any]
         let type: String = inventory["stockType"] as! String
         let quantity: Int = inventory["quantity"] as! Int
