@@ -96,6 +96,16 @@ public struct Inventory {
     public var value: StockValue?
     public var quantity: Int = 0
 
+    public init(type: StockType, value: StockValue? = nil, quantity: Int) {
+        self.type = type
+        self.value = value
+        self.quantity = quantity
+    }
+
+    public init() {
+        self.init(type: .finite, quantity: 0)
+    }
+
     public static func encode(_ key: String, value: Any?) -> [String: Any] {
         var endoedValue: [String: Any] = [:]
         if let inventory: Inventory = value as? Inventory {
