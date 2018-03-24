@@ -26,7 +26,7 @@ extension Test {
 
         dynamic var createdBy: Relation<Test.User> = .init()
 
-        dynamic var skus: ReferenceCollection<Test.SKU> = []
+        dynamic var skus: NestedCollection<Test.SKU> = []
         
     }
 }

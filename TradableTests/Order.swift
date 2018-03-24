@@ -20,23 +20,25 @@ extension Test {
 
         typealias Address = Test.Address
 
-        var parentID: String?
+        dynamic var parentID: String?
 
-        var buyer: Relation<Test.User> = .init()
+        dynamic var buyer: Relation<Test.User> = .init()
 
-        var selledBy: Relation<Test.User> = .init()
+        dynamic var selledBy: Relation<Test.User> = .init()
 
-        var shippingTo: Test.Address?
+        dynamic var shippingTo: Test.Address?
 
-        var paidAt: Date?
+        dynamic var paidAt: Date?
 
-        var expirationDate: Date = Date()
+        dynamic var expirationDate: Date = Date()
 
-        var currency: Currency = .JPY
+        dynamic var currency: Currency = .JPY
 
-        var amount: Double = 0
+        dynamic var amount: Double = 0
 
-        var items: ReferenceCollection<Test.OrderItem> = []
+        dynamic var status: OrderStatus = .created
+
+        dynamic var items: NestedCollection<Test.OrderItem> = []
 
     }
 }

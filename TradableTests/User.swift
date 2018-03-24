@@ -26,9 +26,8 @@ extension Test {
 
         var products: ReferenceCollection<Test.Product> = []
 
-        var skus: ReferenceCollection<Test.SKU> = []
-
         var orders: ReferenceCollection<Test.Order> = []
 
+        lazy var skus: DataSource<Test.SKU>.Query = Test.SKU.where("selledBy", isEqualTo: self.id)
     }
 }

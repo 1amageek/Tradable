@@ -44,14 +44,14 @@ extension Test {
 
         override func encode(_ key: String, value: Any?) -> Any? {
             if key == "inventory" {
-                return Inventory.encode(key, value: value)
+                return self.inventory.encode()
             }
             return nil
         }
 
         override func decode(_ key: String, value: Any?) -> Bool {
             if key == "inventory" {
-                self.inventory = Inventory.decode(key, value: value)
+                self.inventory = Inventory(data: value as! [String: Any])!
                 return true
             }
             return false

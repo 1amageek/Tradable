@@ -24,8 +24,8 @@ public protocol Tradable {
     associatedtype Person: UserProtocol
     var isAvailabled: Bool { get set }
     var products: ReferenceCollection<Product> { get }
-    var skus: ReferenceCollection<Product.SKU> { get }
     var orders: ReferenceCollection<Order> { get }
+    var skus: DataSource<Product.SKU>.Query { get }
 }
 
 public protocol ProductProtocol: Document {
@@ -34,7 +34,7 @@ public protocol ProductProtocol: Document {
     var title: String { get set }
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
-    var skus: ReferenceCollection<SKU> { get }
+    var skus: NestedCollection<SKU> { get }
 }
 
 public extension ProductProtocol where Self: Object, SKU: Object, Person: Object {
@@ -70,9 +70,6 @@ public extension Tradable where Self: Object, Product: Object, Order: Object, Pe
             return
         }
         product.selledBy.set(Person(id: self.id, value: [:]))
-        product.skus.forEach { (sku) in
-            self.skus.insert(sku)
-        }
         self.products.insert(product)
         self.update(block)
     }
