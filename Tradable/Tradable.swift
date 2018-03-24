@@ -106,29 +106,26 @@ public struct Inventory {
         self.init(type: .finite, quantity: 0)
     }
 
-    public static func encode(_ key: String, value: Any?) -> [String: Any] {
-        var endoedValue: [String: Any] = [:]
-        if let inventory: Inventory = value as? Inventory {
-            endoedValue["stockType"] = inventory.type.rawValue
-            if let value: StockValue = inventory.value {
-                endoedValue["stockValue"] = value.rawValue
-            }
-            endoedValue["quantity"] = inventory.quantity
+    public init?(data: [String: Any]) {
+        guard let typeStr: String = data["type"] as? String, let type: StockType = StockType(rawValue: typeStr) else {
+            return nil
         }
-        return endoedValue
+        guard let quantity: Int = data["quantity"] as? Int else {
+            return nil
+        }
+        self.type = type
+        self.quantity = quantity
+        if let value: String = data["value"] as? String {
+            self.value = StockValue(rawValue: value)
+        }
     }
 
-    public static func decode(_ key: String, value: Any?) -> Inventory {
-        let inventory: [String: Any] = value as! [String: Any]
-        let type: String = inventory["stockType"] as! String
-        let quantity: Int = inventory["quantity"] as! Int
-        var decodeValue: Inventory = Inventory(type: StockType(rawValue: type)!,
-                                               value: nil,
-                                               quantity: quantity)
-        if let value: String = inventory["value"] as? String {
-            decodeValue.value = StockValue(rawValue: value)
-        }
-        return decodeValue
+    public func encode() -> [String: Any] {
+        return [
+            "type": self.type,
+            "quantity": self.quantity,
+            "value": self.value ?? NSNull()
+        ]
     }
 }
 
