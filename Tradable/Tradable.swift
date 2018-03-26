@@ -24,7 +24,7 @@ public protocol Tradable {
     associatedtype Person: UserProtocol
     var isAvailabled: Bool { get set }
     var products: ReferenceCollection<Product> { get }
-    var orders: ReferenceCollection<Order> { get }
+    var orders: NestedCollection<Order> { get }
     var skus: DataSource<Product.SKU>.Query { get }
 }
 
@@ -136,9 +136,6 @@ public protocol SKUProtocol: Document {
     var name: String { get set }
     var price: Double { get set }
     var inventory: Inventory { get set }
-//    var stockType: StockType { get set }
-//    var stockQuantity: Int { get set }
-//    var stockValue: StockValue { get set }
     var isPublished: Bool { get set }
     var isActived: Bool { get set }
 }

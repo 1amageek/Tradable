@@ -28,6 +28,8 @@ extension Test {
 
         var type: OrderItemType = .sku
 
+        var product: Relation<Test.Product> = .init()
+
         var sku: Relation<Test.SKU> = .init()
 
         var quantity: Int = 0
