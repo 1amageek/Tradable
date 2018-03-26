@@ -119,9 +119,9 @@ public struct Inventory {
 
     public func encode() -> [String: Any] {
         return [
-            "type": self.type,
+            "type": self.type.rawValue,
             "quantity": self.quantity,
-            "value": self.value ?? NSNull()
+            "value": self.value?.rawValue ?? NSNull()
         ]
     }
 }
