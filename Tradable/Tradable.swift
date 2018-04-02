@@ -87,7 +87,7 @@ public enum StockValue: String {
     case outOfStock = "out_of_stock"
 }
 
-public struct Inventory {
+public class Inventory: NSObject {
 
     public var type: StockType
     public var value: StockValue?
@@ -99,7 +99,7 @@ public struct Inventory {
         self.quantity = quantity
     }
 
-    public init() {
+    public convenience override init() {
         self.init(type: .finite, quantity: 0)
     }
 
