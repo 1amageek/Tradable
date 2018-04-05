@@ -23,8 +23,10 @@ public protocol Tradable {
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var isAvailabled: Bool { get set }
+    var country: String { get set }
     var products: ReferenceCollection<Product> { get }
-    var orders: NestedCollection<Order> { get }
+    var orders: DataSource<Order>.Query { get }
+    var orderings: DataSource<Order>.Query { get }
     var skus: DataSource<Product.SKU>.Query { get }
 }
 
