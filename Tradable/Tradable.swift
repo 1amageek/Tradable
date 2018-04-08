@@ -30,6 +30,33 @@ public protocol Tradable {
     var skus: DataSource<Product.SKU>.Query { get }
 }
 
+public protocol AccountProtocol: Document {
+    associatedtype Transaction: TransactionProtocol
+    var country: String { get set }
+    var isRejected: Bool { get set }
+    var isSigned: Bool { get set }
+    var balance: [String: Double] { get set }
+    var transactions: NestedCollection<Transaction> { get }
+}
+
+public enum TransactionType: String {
+    case payment         = "payment"
+    case paymentRefund   = "payment_refund"
+    case transfer        = "transfer"
+    case transferRefund  = "transfer_refund"
+    case payout          = "payout"
+    case payoutCancel    = "payout_cancel"
+}
+
+public protocol TransactionProtocol: Document {
+    var type: TransactionType { get set }
+    var currency: Currency { get set }
+    var amount: Double { get set }
+    var order: String? { get set }
+    var transfer: String? { get set }
+    var payout: String? { get set }
+}
+
 public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
@@ -184,6 +211,7 @@ public protocol OrderItemProtocol: Document {
     var type: OrderItemType { get set }    // OrderItemType
     var sku: Relation<SKU> { get }
     var quantity: Int { get set }
+    var currency: Currency { get set }
     var amount: Double { get set }
 }
 
