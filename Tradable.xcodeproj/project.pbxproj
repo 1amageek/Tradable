@@ -17,6 +17,8 @@
 		125096F72043FD7200C7FF17 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125096F62043FD7200C7FF17 /* User.swift */; };
 		125096F82043FDB700C7FF17 /* Tradable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFEF1920433882000EB3D3 /* Tradable.swift */; };
 		125096F92043FDB700C7FF17 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DFEF1B204338A2000EB3D3 /* Currency.swift */; };
+		126FCDEB207A6BDA00C7238F /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126FCDEA207A6BDA00C7238F /* Transaction.swift */; };
+		126FCDED207A6CA400C7238F /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126FCDEC207A6CA400C7238F /* Account.swift */; };
 		12A31CFD2043FEBD00E5E72A /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A31CFC2043FEBD00E5E72A /* Address.swift */; };
 		12A31CFF2043FF9E00E5E72A /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A31CFE2043FF9E00E5E72A /* Order.swift */; };
 		12A31D012043FFB600E5E72A /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A31D002043FFB600E5E72A /* OrderItem.swift */; };
@@ -48,6 +50,8 @@
 		125096ED2043FD4E00C7FF17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		125096F42043FD6200C7FF17 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		125096F62043FD7200C7FF17 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		126FCDEA207A6BDA00C7238F /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		126FCDEC207A6CA400C7238F /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		12A31CFC2043FEBD00E5E72A /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		12A31CFE2043FF9E00E5E72A /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		12A31D002043FFB600E5E72A /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
@@ -94,8 +98,10 @@
 				125096F42043FD6200C7FF17 /* Test.swift */,
 				125096F62043FD7200C7FF17 /* User.swift */,
 				12A31CFC2043FEBD00E5E72A /* Address.swift */,
+				126FCDEA207A6BDA00C7238F /* Transaction.swift */,
 				12A31CFE2043FF9E00E5E72A /* Order.swift */,
 				12A31D002043FFB600E5E72A /* OrderItem.swift */,
+				126FCDEC207A6CA400C7238F /* Account.swift */,
 				12A31D022043FFD500E5E72A /* SKU.swift */,
 				12448C4C2046B21400CE2CE0 /* Product.swift */,
 				12448C4E2046B25100CE2CE0 /* Asset.swift */,
@@ -348,7 +354,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				12A31CFD2043FEBD00E5E72A /* Address.swift in Sources */,
+				126FCDED207A6CA400C7238F /* Account.swift in Sources */,
 				125096F82043FDB700C7FF17 /* Tradable.swift in Sources */,
+				126FCDEB207A6BDA00C7238F /* Transaction.swift in Sources */,
 				125096F92043FDB700C7FF17 /* Currency.swift in Sources */,
 				12448C4F2046B25100CE2CE0 /* Asset.swift in Sources */,
 				125096EC2043FD4E00C7FF17 /* TradableTests.swift in Sources */,

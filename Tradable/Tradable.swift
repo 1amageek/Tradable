@@ -10,17 +10,21 @@ import FirebaseFirestore
 import FirebaseAuth
 import Pring
 
+public protocol UserProtocol: Document {
+
+}
+
 public protocol AddressProtocol: Document {
 
 }
 
-public protocol UserProtocol {
+public protocol Tradable {
     associatedtype Product: ProductProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var isAvailabled: Bool { get set }
     var country: String { get set }
-    var products: ReferenceCollection<Product> { get }
+    var products: DataSource<Product>.Query { get }
     var orders: DataSource<Order>.Query { get }
     var orderings: DataSource<Order>.Query { get }
     var skus: DataSource<Product.SKU>.Query { get }
@@ -83,22 +87,23 @@ public extension ProductProtocol where Self: Object, SKU: Object, Person: Object
     }
 }
 
-public extension Tradable where Self: Object, Product: Object, Order: Object, Person == Product.Person {
-
-    public func add(product: Product, block: ((Error?) -> Void)?) {
-        guard let _ = Auth.auth().currentUser else {
-            print("[Tradable] error: Please perform user authentication.")
-            return
-        }
-        if product.skus.isEmpty {
-            print("[Tradable] error: SKU is required for the product.")
-            return
-        }
-        product.selledBy.set(Person(id: self.id, value: [:]))
-        self.products.insert(product)
-        self.update(block)
-    }
-}
+//public extension Tradable where Self: Object, Product: Object, Order: Object, Person == Product.Person {
+//
+//    public func add(product: Product, block: ((Error?) -> Void)?) {
+//        guard let _ = Auth.auth().currentUser else {
+//            print("[Tradable] error: Please perform user authentication.")
+//            return
+//        }
+//        if product.skus.isEmpty {
+//            print("[Tradable] error: SKU is required for the product.")
+//            return
+//        }
+//        product.selledBy.set(Person(id: self.id, value: [:]))
+//        
+//        self.products.insert(product)
+//        self.update(block)
+//    }
+//}
 
 public enum StockType: String {
     case finite     = "finite"

@@ -34,6 +34,8 @@ extension Test {
 
         var quantity: Int = 0
 
+        var currency: Currency = .JPY
+
         var amount: Double = 0
 
         var desc: String?

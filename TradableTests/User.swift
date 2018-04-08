@@ -24,9 +24,13 @@ extension Test {
 
         dynamic var isAvailabled: Bool = false
 
-        var products: ReferenceCollection<Test.Product> = []
+        dynamic var country: String = "jp"
 
-        var orders: ReferenceCollection<Test.Order> = []
+        dynamic var orders: DataSource<Test.Order>.Query = Test.Order.query
+
+        dynamic var orderings: DataSource<Test.Order>.Query = Test.Order.query
+
+        dynamic var products: DataSource<Product>.Query = Product.query
 
         lazy var skus: DataSource<Test.SKU>.Query = Test.SKU.where("selledBy", isEqualTo: self.id)
     }
