@@ -10,15 +10,11 @@ import FirebaseFirestore
 import FirebaseAuth
 import Pring
 
-public protocol UserProtocol: Document {
-
-}
-
 public protocol AddressProtocol: Document {
 
 }
 
-public protocol Tradable {
+public protocol UserProtocol {
     associatedtype Product: ProductProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
