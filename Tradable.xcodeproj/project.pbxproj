@@ -179,7 +179,6 @@
 				125096E62043FD4E00C7FF17 /* Frameworks */,
 				125096E72043FD4E00C7FF17 /* Resources */,
 				05D8AF01578AB8D4DD6F6DB0 /* [CP] Embed Pods Frameworks */,
-				8132F9D89DD36B8B6F76BD8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -200,7 +199,6 @@
 				12DFEF0A20433842000EB3D3 /* Frameworks */,
 				12DFEF0B20433842000EB3D3 /* Headers */,
 				12DFEF0C20433842000EB3D3 /* Resources */,
-				0A172F39314652AAEE614D43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -306,21 +304,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradableTests/Pods-TradableTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0A172F39314652AAEE614D43 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tradable/Pods-Tradable-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		209B3F0DAA5E8DF921DCBA4D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -337,21 +320,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8132F9D89DD36B8B6F76BD8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradableTests/Pods-TradableTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		94542969F5787296C6C57390 /* [CP] Check Pods Manifest.lock */ = {
