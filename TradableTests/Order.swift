@@ -36,11 +36,11 @@ extension Test {
 
         dynamic var currency: Currency = .JPY
 
-        dynamic var amount: Double = 0
+        dynamic var amount: Int = 0
 
-        dynamic var fee: Double = 0
+        dynamic var fee: Int = 0
 
-        dynamic var net: Double = 0
+        dynamic var net: Int = 0
 
         dynamic var status: OrderStatus = .created
 

@@ -34,9 +34,19 @@ class TradableTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testJPY() {
+
+        XCTAssertEqual(Currency.JPY.formatted(10, withSymbol: true), "¥10")
+        XCTAssertEqual(Currency.USD.formatted(10, withSymbol: true), "$0.10")
+
+        XCTAssertEqual(Currency.JPY.formatted(10), "10")
+        XCTAssertEqual(Currency.USD.formatted(10), "0.1")
+
+        print(Currency.JPY.formatted(10))
+        print(Currency.USD.formatted(10))
+        print(Currency.JPY.formatted(10, withSymbol: true))
+        print(Currency.USD.formatted(10, withSymbol: true))
+
     }
     
     

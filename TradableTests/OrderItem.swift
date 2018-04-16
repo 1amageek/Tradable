@@ -36,7 +36,7 @@ extension Test {
 
         var currency: Currency = .JPY
 
-        var amount: Double = 0
+        var amount: Int = 0
 
         var desc: String?
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		122806E62084F2EE00066DA2 /* CurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122806E52084F2EE00066DA2 /* CurrencyTests.swift */; };
 		12448C4D2046B21400CE2CE0 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12448C4C2046B21400CE2CE0 /* Product.swift */; };
 		12448C4F2046B25100CE2CE0 /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12448C4E2046B25100CE2CE0 /* Asset.swift */; };
 		12448C512046C1DE00CE2CE0 /* Tradable.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 12448C502046C1DE00CE2CE0 /* Tradable.podspec */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		122806E52084F2EE00066DA2 /* CurrencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTests.swift; sourceTree = "<group>"; };
 		12448C4C2046B21400CE2CE0 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		12448C4E2046B25100CE2CE0 /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
 		12448C502046C1DE00CE2CE0 /* Tradable.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Tradable.podspec; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			children = (
 				12448C522046C80900CE2CE0 /* GoogleService-Info.plist */,
 				125096EB2043FD4E00C7FF17 /* TradableTests.swift */,
+				122806E52084F2EE00066DA2 /* CurrencyTests.swift */,
 				125096F42043FD6200C7FF17 /* Test.swift */,
 				125096F62043FD7200C7FF17 /* User.swift */,
 				12A31CFC2043FEBD00E5E72A /* Address.swift */,
@@ -357,6 +360,7 @@
 				126FCDED207A6CA400C7238F /* Account.swift in Sources */,
 				125096F82043FDB700C7FF17 /* Tradable.swift in Sources */,
 				126FCDEB207A6BDA00C7238F /* Transaction.swift in Sources */,
+				122806E62084F2EE00066DA2 /* CurrencyTests.swift in Sources */,
 				125096F92043FDB700C7FF17 /* Currency.swift in Sources */,
 				12448C4F2046B25100CE2CE0 /* Asset.swift in Sources */,
 				125096EC2043FD4E00C7FF17 /* TradableTests.swift in Sources */,

@@ -26,7 +26,7 @@ extension Test {
 
         dynamic var currency: Currency = .JPY
 
-        dynamic var price: Double = 0
+        dynamic var price: Int = 0
 
         dynamic var name: String = ""
 

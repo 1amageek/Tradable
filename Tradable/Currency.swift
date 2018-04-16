@@ -157,3 +157,23 @@ public enum Currency: String, Codable {
     case YER = "yer" // Yemeni Rial, YER
     case ZMW = "zmw" // Zambian Kwacha, ZMW
 }
+
+extension Currency {
+
+    public func formatted(_ amount: Int, withSymbol: Bool = false) -> String {
+        let currencyCode: String = self.rawValue.uppercased()
+        let decimal = NSDecimalNumber(value: amount)
+        let priceFormatter: NumberFormatter = NumberFormatter()
+        priceFormatter.numberStyle = .currency
+        priceFormatter.currencyCode = currencyCode
+        let price: NSDecimalNumber = priceFormatter.minimumFractionDigits == 0 ?
+            decimal :
+            decimal.dividing(by: NSDecimalNumber(string: "10")
+                .raising(toPower: priceFormatter.minimumFractionDigits))
+        if withSymbol {
+            return priceFormatter.string(from: price)!
+        } else {
+            return price.stringValue
+        }
+    }
+}

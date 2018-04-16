@@ -74,9 +74,9 @@ public enum TransactionType: String {
 public protocol TransactionProtocol: Document {
     var type: TransactionType { get set }
     var currency: Currency { get set }
-    var amount: Double { get set }
-    var fee: Double { get set }
-    var net: Double { get set }
+    var amount: Int { get set }
+    var fee: Int { get set }
+    var net: Int { get set }
     var order: String? { get set }
     var transfer: String? { get set }
     var payout: String? { get set }
@@ -189,7 +189,7 @@ public protocol SKUProtocol: Document {
     var currency: Currency { get set }
     var product: Relation<Product> { get set }
     var name: String { get set }
-    var price: Double { get set }
+    var price: Int { get set }
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
     var isActived: Bool { get set }
@@ -245,7 +245,7 @@ public protocol OrderItemProtocol: Document {
     var sku: Relation<SKU> { get }
     var quantity: Int { get set }
     var currency: Currency { get set }
-    var amount: Double { get set }
+    var amount: Int { get set }
 }
 
 public protocol OrderProtocol: Document {
@@ -260,9 +260,9 @@ public protocol OrderProtocol: Document {
     var paidAt: Date? { get set }
     var expirationDate: Date { get set }
     var currency: Currency { get set }
-    var amount: Double { get set }
-    var fee: Double { get set }
-    var net: Double { get set }
+    var amount: Int { get set }
+    var fee: Int { get set }
+    var net: Int { get set }
     var items: NestedCollection<OrderItem> { get set }
     var status: OrderStatus { get set }
 }
