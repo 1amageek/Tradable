@@ -30,12 +30,35 @@ public protocol Tradable {
     var skus: DataSource<Product.SKU>.Query { get }
 }
 
+public class Balance: NSObject {
+
+    public private(set) var accountsReceivable: [String: Double] = [:]
+
+    public private(set) var available: [String: Double] = [:]
+
+    public override init() {
+        super.init()
+    }
+
+    public init?(data: [String: Any]) {
+        guard let accountsReceivable: [String: Double] = data["accountsReceivable"] as? [String: Double] else {
+            return nil
+        }
+        guard let available: [String: Double] = data["available"] as? [String: Double] else {
+            return nil
+        }
+        self.accountsReceivable = accountsReceivable
+        self.available = available
+    }
+}
+
 public protocol AccountProtocol: Document {
     associatedtype Transaction: TransactionProtocol
     var country: String { get set }
     var isRejected: Bool { get set }
     var isSigned: Bool { get set }
-    var balance: [String: Double] { get set }
+    var commissionRatio: Double { get set } // 0 ~ 1
+    var balance: Balance { get set }
     var transactions: NestedCollection<Transaction> { get }
 }
 
@@ -52,6 +75,8 @@ public protocol TransactionProtocol: Document {
     var type: TransactionType { get set }
     var currency: Currency { get set }
     var amount: Double { get set }
+    var fee: Double { get set }
+    var net: Double { get set }
     var order: String? { get set }
     var transfer: String? { get set }
     var payout: String? { get set }
@@ -178,8 +203,6 @@ public enum OrderItemType: String {
 }
 
 public enum OrderStatus: String {
-    case unknown = "unknown"
-
     /// Immediately after the order made
     case created = "created"
 
@@ -189,17 +212,26 @@ public enum OrderStatus: String {
     /// Inventory processing was successful
     case received = "received"
 
-    /// Payment was successful
+    /// Customer payment succeeded, but we do not transfer funds to the account.
     case paid = "paid"
 
     /// Successful inventory processing but payment failed.
     case waitingForPayment = "waitingForPayment"
+
+    /// Payment has been refunded.
+    case refunded = "refunded"
 
     /// If payment was made, I failed in refunding.
     case waitingForRefund = "waitingForRefund"
 
     /// Everything including refunds was canceled. Inventory processing is not canceled
     case canceled = "canceled"
+
+    /// It means that a payout has been made to the Account.
+    case transferd = "transferd"
+
+    /// It means that the transfer failed.
+    case waitingForTransferrd = "waitingForTransferrd"
 }
 
 public protocol OrderItemProtocol: Document {
@@ -223,11 +255,14 @@ public protocol OrderProtocol: Document {
     var parentID: String? { get set }
     var buyer: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
+    var transferredTo: Set<String> { get set }
     var shippingTo: Address? { get set }
     var paidAt: Date? { get set }
     var expirationDate: Date { get set }
     var currency: Currency { get set }
     var amount: Double { get set }
+    var fee: Double { get set }
+    var net: Double { get set }
     var items: NestedCollection<OrderItem> { get set }
     var status: OrderStatus { get set }
 }

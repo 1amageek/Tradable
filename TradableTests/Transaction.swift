@@ -20,6 +20,10 @@ extension Test {
 
         dynamic var amount: Double = 0.0
 
+        dynamic var fee: Double = 0.0
+
+        dynamic var net: Double = 0.9
+
         dynamic var order: String?
 
         dynamic var transfer: String?

@@ -28,6 +28,8 @@ extension Test {
 
         dynamic var shippingTo: Test.Address?
 
+        dynamic var transferredTo: Set<String> = []
+
         dynamic var paidAt: Date?
 
         dynamic var expirationDate: Date = Date()
@@ -35,6 +37,10 @@ extension Test {
         dynamic var currency: Currency = .JPY
 
         dynamic var amount: Double = 0
+
+        dynamic var fee: Double = 0
+
+        dynamic var net: Double = 0
 
         dynamic var status: OrderStatus = .created
 
