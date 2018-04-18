@@ -32,19 +32,19 @@ public protocol Tradable {
 
 public class Balance: NSObject {
 
-    public private(set) var accountsReceivable: [String: Double] = [:]
+    public private(set) var accountsReceivable: [String: Int] = [:]
 
-    public private(set) var available: [String: Double] = [:]
+    public private(set) var available: [String: Int] = [:]
 
     public override init() {
         super.init()
     }
 
     public init?(data: [String: Any]) {
-        guard let accountsReceivable: [String: Double] = data["accountsReceivable"] as? [String: Double] else {
+        guard let accountsReceivable: [String: Int] = data["accountsReceivable"] as? [String: Int] else {
             return nil
         }
-        guard let available: [String: Double] = data["available"] as? [String: Double] else {
+        guard let available: [String: Int] = data["available"] as? [String: Int] else {
             return nil
         }
         self.accountsReceivable = accountsReceivable
