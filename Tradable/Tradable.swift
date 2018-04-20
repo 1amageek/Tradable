@@ -189,6 +189,7 @@ public protocol SKUProtocol: Document {
     var currency: Currency { get set }
     var product: Relation<Product> { get set }
     var amount: Int { get set }
+    var unitSales: Int { get set }
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
     var isActived: Bool { get set }
