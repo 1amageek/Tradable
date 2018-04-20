@@ -188,8 +188,7 @@ public protocol SKUProtocol: Document {
     var createdBy: Relation<Person> { get set }
     var currency: Currency { get set }
     var product: Relation<Product> { get set }
-    var name: String { get set }
-    var price: Int { get set }
+    var amount: Int { get set }
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
     var isActived: Bool { get set }
