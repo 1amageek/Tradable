@@ -30,11 +30,7 @@ extension Test {
 
         dynamic var inventory: Inventory = Inventory(type: .finite, value: nil, quantity: 0)
 
-//        dynamic var stockType: StockType = .finite
-//
-//        dynamic var stockQuantity: Int = 0
-//
-//        dynamic var stockValue: StockValue = .limited
+        dynamic var unitSales: Int = 0
 
         dynamic var isPublished: Bool = false
 

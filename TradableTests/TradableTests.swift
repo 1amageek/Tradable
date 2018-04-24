@@ -36,12 +36,15 @@ class TradableTests: XCTestCase {
     
     func testJPY() {
 
+
         XCTAssertEqual(Currency.JPY.formatted(10, withSymbol: true), "¥10")
         XCTAssertEqual(Currency.USD.formatted(10, withSymbol: true), "$0.10")
 
         XCTAssertEqual(Currency.JPY.formatted(10), "10")
         XCTAssertEqual(Currency.USD.formatted(10), "0.1")
 
+        print(Currency.JPY.formatted(0, withSymbol: true))
+        print(Currency.JPY.formatted(0, withSymbol: true, zeroSymbol: "Free"))
         print(Currency.JPY.formatted(10))
         print(Currency.USD.formatted(10))
         print(Currency.JPY.formatted(10, withSymbol: true))

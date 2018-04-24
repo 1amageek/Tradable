@@ -160,12 +160,13 @@ public enum Currency: String, Codable {
 
 extension Currency {
 
-    public func formatted(_ amount: Int, withSymbol: Bool = false) -> String {
+    public func formatted(_ amount: Int, withSymbol: Bool = false, zeroSymbol: String? = nil) -> String {
         let currencyCode: String = self.rawValue.uppercased()
         let decimal = NSDecimalNumber(value: amount)
         let priceFormatter: NumberFormatter = NumberFormatter()
         priceFormatter.numberStyle = .currency
         priceFormatter.currencyCode = currencyCode
+        priceFormatter.zeroSymbol = zeroSymbol
         let price: NSDecimalNumber = priceFormatter.minimumFractionDigits == 0 ?
             decimal :
             decimal.dividing(by: NSDecimalNumber(string: "10")
