@@ -266,3 +266,15 @@ public protocol OrderProtocol: Document {
     var items: NestedCollection<OrderItem> { get set }
     var status: OrderStatus { get set }
 }
+
+public enum TradableErrorCode: String {
+    case invalidArgument = "invalidArgument"
+    case lessMinimumAmount = "lessMinimumAmount"
+    case invalidCurrency = "invalidCurrency"
+    case invalidAmount = "invalidAmount"
+    case outOfStock = "outOfStock"
+    case invalidStatus = "invalidStatus"
+    case internalError = "internal"
+}
+
+
