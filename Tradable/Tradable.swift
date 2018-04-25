@@ -268,13 +268,13 @@ public protocol OrderProtocol: Document {
 }
 
 public enum TradableErrorCode: String {
-    case invalidArgument = "invalidArgument"
-    case lessMinimumAmount = "lessMinimumAmount"
-    case invalidCurrency = "invalidCurrency"
-    case invalidAmount = "invalidAmount"
-    case outOfStock = "outOfStock"
-    case invalidStatus = "invalidStatus"
-    case internalError = "internal"
+    case invalidArgument    = "invalidArgument"
+    case lessMinimumAmount  = "lessMinimumAmount"
+    case invalidCurrency    = "invalidCurrency"
+    case invalidAmount      = "invalidAmount"
+    case outOfStock         = "outOfStock"
+    case invalidStatus      = "invalidStatus"
+    case internalError      = "internal"
 }
 
 
