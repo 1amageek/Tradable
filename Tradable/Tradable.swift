@@ -10,14 +10,6 @@ import FirebaseFirestore
 import FirebaseAuth
 import Pring
 
-public protocol UserProtocol: Document {
-
-}
-
-public protocol AddressProtocol: Document {
-
-}
-
 public protocol Tradable {
     associatedtype Product: ProductProtocol
     associatedtype Order: OrderProtocol
@@ -30,9 +22,27 @@ public protocol Tradable {
     var skus: DataSource<Product.SKU>.Query { get }
 }
 
+// MARK: - User
+
+public protocol UserProtocol: Document {
+    associatedtype Order: OrderProtocol
+    associatedtype TradeTransaction: TradeTransactionProtocol
+    var isAvailabled: Bool { get set }
+    var country: String { get set }
+    var orders: NestedCollection<Order> { get set }
+    var receivedOrders: NestedCollection<Order> { get set }
+    var tradeTransactions: NestedCollection<TradeTransaction> { get set }
+}
+
+public protocol AddressProtocol: Document {
+
+}
+
+// MARK: - Account
+
 public class Balance: NSObject {
 
-    public private(set) var accountsReceivable: [String: Int] = [:]
+    public private(set) var pending: [String: Int] = [:]
 
     public private(set) var available: [String: Int] = [:]
 
@@ -41,46 +51,81 @@ public class Balance: NSObject {
     }
 
     public init?(data: [String: Any]) {
-        guard let accountsReceivable: [String: Int] = data["accountsReceivable"] as? [String: Int] else {
+        guard let pending: [String: Int] = data["pending"] as? [String: Int] else {
             return nil
         }
         guard let available: [String: Int] = data["available"] as? [String: Int] else {
             return nil
         }
-        self.accountsReceivable = accountsReceivable
+        self.pending = pending
         self.available = available
     }
 }
 
 public protocol AccountProtocol: Document {
-    associatedtype Transaction: TransactionProtocol
+    associatedtype BalanceTransaction: BalanceTransactionProtocol
     var country: String { get set }
     var isRejected: Bool { get set }
     var isSigned: Bool { get set }
-    var commissionRatio: Double { get set } // 0 ~ 1
     var balance: Balance { get set }
-    var transactions: NestedCollection<Transaction> { get }
+    var transactions: NestedCollection<BalanceTransaction> { get }
 }
 
-public enum TransactionType: String {
-    case payment         = "payment"
-    case paymentRefund   = "payment_refund"
-    case transfer        = "transfer"
-    case transferRefund  = "transfer_refund"
-    case payout          = "payout"
-    case payoutCancel    = "payout_cancel"
+// MARK: - TradeTransaction
+
+public enum TradeTransactionType: String {
+    case unknown = "unknown"
+    case order = "order"
+    case orderChange = "order_change"
+    case orderCancel = "order_cancel"
+    case storage = "storage"
+    case retrieval = "retrieval"
 }
 
-public protocol TransactionProtocol: Document {
-    var type: TransactionType { get set }
+public protocol TradeTransactionProtocol: Document {
+    associatedtype Product: ProductProtocol
+    associatedtype SKU: SKUProtocol
+    associatedtype Order: OrderProtocol
+    associatedtype Person: UserProtocol
+    var type: TradeTransactionType { get set }
+    var quantity: Int { get set }
+    var selledBy: Relation<Person> { get set }
+    var purchasedBy: Relation<Person> { get set }
+    var order: Relation<Order> { get set }
+    var product: Relation<Product> { get set }
+    var sku: Relation<SKU> { get set }
+    var items: [Any] { get set }
+}
+
+// MARK: - BalanceTransaction
+
+public enum BalanceTransactionType: String {
+    case unknown = "unknown"
+    case payment = "payment"
+    case paymentRefund = "payment_refund"
+    case transfer = "transfer"
+    case transferRefund = "transfer_refund"
+    case payout = "payout"
+    case payoutCancel = "payout_cancel"
+}
+
+public protocol BalanceTransactionProtocol: Document {
+    associatedtype Product: ProductProtocol
+    associatedtype SKU: SKUProtocol
+    associatedtype Order: OrderProtocol
+    associatedtype Person: UserProtocol
+    var type: BalanceTransactionType { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
-    var fee: Int { get set }
-    var net: Int { get set }
-    var order: String? { get set }
-    var transfer: String? { get set }
-    var payout: String? { get set }
+    var from: Relation<Person> { get set }
+    var to: Relation<Person> { get set }
+    var order: Relation<Order> { get set }
+    var transfer: String { get set }
+    var payout: String { get set }
+    var transactionResults: [Any] { get set }
 }
+
+// MARK: - Product
 
 public protocol ProductProtocol: Document {
     associatedtype SKU: SKUProtocol
@@ -111,24 +156,6 @@ public extension ProductProtocol where Self: Object, SKU: Object, Person: Object
         self.createdBy.set(Person(id: user.uid, value: [:]))
     }
 }
-
-//public extension Tradable where Self: Object, Product: Object, Order: Object, Person == Product.Person {
-//
-//    public func add(product: Product, block: ((Error?) -> Void)?) {
-//        guard let _ = Auth.auth().currentUser else {
-//            print("[Tradable] error: Please perform user authentication.")
-//            return
-//        }
-//        if product.skus.isEmpty {
-//            print("[Tradable] error: SKU is required for the product.")
-//            return
-//        }
-//        product.selledBy.set(Person(id: self.id, value: [:]))
-//        
-//        self.products.insert(product)
-//        self.update(block)
-//    }
-//}
 
 public enum StockType: String {
     case finite     = "finite"
@@ -181,6 +208,8 @@ public class Inventory: NSObject {
     }
 }
 
+// MARK: - SKU
+
 public protocol SKUProtocol: Document {
     associatedtype Person: UserProtocol
     associatedtype Product: ProductProtocol
@@ -192,8 +221,10 @@ public protocol SKUProtocol: Document {
     var unitSales: Int { get set }
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
-    var isActived: Bool { get set }
+    var isAvailabled: Bool { get set }
 }
+
+// MARK: - Order
 
 public enum OrderItemType: String {
     case sku        = "sku"
@@ -202,36 +233,29 @@ public enum OrderItemType: String {
     case discount   = "discount"
 }
 
-public enum OrderStatus: String {
-    /// Immediately after the order made
-    case created = "created"
+public enum OrderItemStatus: String  {
+    case none = "none"
+    case ordered = "ordered"
+    case changed = "changed"
+    case canceled = "canceld"
+}
 
-    /// Inventory processing was done, but it was rejected
+public enum OrderTransferStatus: String {
+    case none = "none"
     case rejected = "rejected"
-
-    /// Inventory processing was successful
-    case received = "received"
-
-    /// Customer payment succeeded, but we do not transfer funds to the account.
-    case paid = "paid"
-
-    /// Successful inventory processing but payment failed.
-    case waitingForPayment = "waitingForPayment"
-
-    /// Payment has been refunded.
-    case refunded = "refunded"
-
-    /// If payment was made, I failed in refunding.
-    case waitingForRefund = "waitingForRefund"
-
-    /// Everything including refunds was canceled. Inventory processing is not canceled
+    case transferred = "transferred"
     case canceled = "canceled"
+    case transferFailure = "failure"
+    case cancelFailure = "cancel_failure"
+}
 
-    /// It means that a payout has been made to the Account.
-    case transferd = "transferd"
-
-    /// It means that the transfer failed.
-    case waitingForTransferrd = "waitingForTransferrd"
+public enum OrderPaymentStatus: String {
+    case none = "none"
+    case rejected = "rejected"
+    case paid = "paid"
+    case canceled = "canceled"
+    case paymentFailure = "failure"
+    case cancelFailure = "cancel_failure"
 }
 
 public protocol OrderItemProtocol: Document {
@@ -239,13 +263,14 @@ public protocol OrderItemProtocol: Document {
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var order: Relation<Order> { get set }
-    var buyer: Relation<Person> { get set }
+    var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }    // OrderItemType
     var sku: Relation<SKU> { get }
     var quantity: Int { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
+    var status: OrderItemStatus { get set }
 }
 
 public protocol OrderProtocol: Document {
@@ -253,18 +278,32 @@ public protocol OrderProtocol: Document {
     associatedtype Person: UserProtocol
     associatedtype Address: AddressProtocol
     var parentID: String? { get set }
-    var buyer: Relation<Person> { get set }
+    var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
-    var transferredTo: Set<String> { get set }
     var shippingTo: Address? { get set }
+    var transferredTo: Set<String> { get set }
     var paidAt: Date? { get set }
     var expirationDate: Date { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
-    var fee: Int { get set }
-    var net: Int { get set }
     var items: NestedCollection<OrderItem> { get set }
-    var status: OrderStatus { get set }
+    var paymentStatus: OrderPaymentStatus { get set }
+    var transferStatus: OrderTransferStatus { get set }
+    var transactionResults: [String: Any] { get set }
+}
+
+// MARK: - Item
+
+public protocol ItemProtocol: Document {
+    associatedtype Product: ProductProtocol
+    associatedtype SKU: SKUProtocol
+    associatedtype Order: OrderProtocol
+    associatedtype Person: UserProtocol
+    var selledBy: Relation<Person> { get set }
+    var order: Relation<Order> { get set }
+    var product: Relation<Product> { get set }
+    var sku: Relation<SKU> { get set }
+    var isCanceled: Bool { get }
 }
 
 public enum TradableErrorCode: String {
