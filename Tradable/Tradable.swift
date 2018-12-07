@@ -315,5 +315,3 @@ public enum TradableErrorCode: String {
     case invalidStatus      = "invalidStatus"
     case internalError      = "internal"
 }
-
-
