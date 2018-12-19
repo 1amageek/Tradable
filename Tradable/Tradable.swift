@@ -286,7 +286,7 @@ public protocol OrderProtocol: Document {
     var expirationDate: Date { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
-    var items: NestedCollection<OrderItem> { get set }
+    var items: List<OrderItem> { get set }
     var paymentStatus: OrderPaymentStatus { get set }
     var transferStatus: OrderTransferStatus { get set }
     var transactionResults: [String: Any] { get set }
