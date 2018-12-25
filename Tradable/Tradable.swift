@@ -210,9 +210,14 @@ public class Inventory: NSObject {
 
 // MARK: - SKU
 
+public protocol SKUShardProtocol: Document {
+    var quantity: Int { get set }
+}
+
 public protocol SKUProtocol: Document {
     associatedtype Person: UserProtocol
     associatedtype Product: ProductProtocol
+    associatedtype SKUShard: SKUShardProtocol
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var currency: Currency { get set }
@@ -222,6 +227,9 @@ public protocol SKUProtocol: Document {
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
     var isAvailabled: Bool { get set }
+    var isOutOfStock: Bool { get set }
+    var numberOfShards: Int { get set }
+    var shards: NestedCollection<SKUShard> { get set }
 }
 
 // MARK: - Order
