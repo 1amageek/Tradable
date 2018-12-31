@@ -12,14 +12,13 @@ import Pring
 
 public protocol Tradable {
     associatedtype Product: ProductProtocol
+    associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var isAvailabled: Bool { get set }
     var country: String { get set }
-    var products: DataSource<Product>.Query { get }
     var orders: DataSource<Order>.Query { get }
     var orderings: DataSource<Order>.Query { get }
-    var skus: DataSource<Product.SKU>.Query { get }
 }
 
 // MARK: - User
@@ -68,7 +67,7 @@ public protocol AccountProtocol: Document {
     var isRejected: Bool { get set }
     var isSigned: Bool { get set }
     var balance: Balance { get set }
-    var transactions: NestedCollection<BalanceTransaction> { get }
+    var balanceTransactions: NestedCollection<BalanceTransaction> { get }
 }
 
 // MARK: - TradeTransaction
@@ -128,15 +127,13 @@ public protocol BalanceTransactionProtocol: Document {
 // MARK: - Product
 
 public protocol ProductProtocol: Document {
-    associatedtype SKU: SKUProtocol
     associatedtype Person: UserProtocol
     var title: String { get set }
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
-    var skus: NestedCollection<SKU> { get }
 }
 
-public extension ProductProtocol where Self: Object, SKU: Object, Person: Object {
+public extension ProductProtocol where Self: Object, Person: Object {
 
     public init() {
         self.init()
