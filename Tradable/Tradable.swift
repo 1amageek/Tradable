@@ -128,9 +128,13 @@ public protocol BalanceTransactionProtocol: Document {
 
 public protocol ProductProtocol: Document {
     associatedtype Person: UserProtocol
-    var title: String { get set }
+    associatedtype SKU: SKUProtocol
+    var name: String { get set }
+    var caption: String { get set }
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
+    var isAvailabled: Bool { get set }
+    var SKUs: NestedCollection<SKU> { get set }
 }
 
 public extension ProductProtocol where Self: Object, Person: Object {
