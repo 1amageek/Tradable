@@ -212,7 +212,6 @@ public class Inventory: NSObject {
 // MARK: - SKU
 
 public protocol InventoryStockProtocol: Document {
-    var quantity: Int { get set }
     var isAvailabled: Bool { get set }
     var SKU: String { get set }
 }
