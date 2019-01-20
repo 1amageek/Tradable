@@ -291,8 +291,8 @@ public protocol OrderProtocol: Document {
     var selledBy: Relation<Person> { get set }
     var shippingTo: Address? { get set }
     var transferredTo: Set<String> { get set }
-    var paidAt: Date? { get set }
-    var expirationDate: Date { get set }
+    var paidAt: Timestamp? { get set }
+    var expirationDate: Timestamp { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
     var items: List<OrderItem> { get set }
