@@ -63,11 +63,36 @@ public class Balance: NSObject {
 
 public protocol AccountProtocol: Document {
     associatedtype BalanceTransaction: BalanceTransactionProtocol
+    associatedtype PayoutRequest: PayoutProtocol
     var country: String { get set }
     var isRejected: Bool { get set }
     var isSigned: Bool { get set }
     var balance: Balance { get set }
     var balanceTransactions: NestedCollection<BalanceTransaction> { get }
+    var payoutRequests: NestedCollection<PayoutRequest> { get }
+}
+
+public enum PayoutStatus: String {
+
+    case none = "none"
+
+    case requested = "requested"
+
+    case rejected = "rejected"
+
+    case completed = "completed"
+
+    case cancelled = "cancelled"
+}
+
+public protocol PayoutProtocol: Document {
+    associatedtype Person: AccountProtocol
+    var currency: Currency { get set }
+    var amount: Int { get set }
+    var account: String { get set }
+    var status: PayoutStatus { get set }
+    var transactionResults: [Any] { get set }
+    var isCancelled: Bool { get set }
 }
 
 // MARK: - TradeTransaction
@@ -93,7 +118,8 @@ public protocol TradeTransactionProtocol: Document {
     var order: Relation<Order> { get set }
     var product: Relation<Product> { get set }
     var sku: Relation<SKU> { get set }
-    var items: [Any] { get set }
+    var inventoryStocks: [String] { get set }
+    var items: [String] { get set }
 }
 
 // MARK: - BalanceTransaction
@@ -253,7 +279,7 @@ public enum OrderTransferStatus: String {
     case none = "none"
     case rejected = "rejected"
     case transferred = "transferred"
-    case canceled = "canceled"
+    case cancelled = "cancelled"
     case transferFailure = "failure"
     case cancelFailure = "cancel_failure"
 }
@@ -261,8 +287,9 @@ public enum OrderTransferStatus: String {
 public enum OrderPaymentStatus: String {
     case none = "none"
     case rejected = "rejected"
+    case authorized = "authorized"
     case paid = "paid"
-    case canceled = "canceled"
+    case cancelled = "cancelled"
     case paymentFailure = "failure"
     case cancelFailure = "cancel_failure"
 }
@@ -275,7 +302,7 @@ public protocol OrderItemProtocol: Document {
     var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }    // OrderItemType
-    var sku: Relation<SKU> { get }
+    var sku: Relation<SKU> { get set }
     var quantity: Int { get set }
     var currency: Currency { get set }
     var amount: Int { get set }
@@ -299,6 +326,7 @@ public protocol OrderProtocol: Document {
     var paymentStatus: OrderPaymentStatus { get set }
     var transferStatus: OrderTransferStatus { get set }
     var transactionResults: [String: Any] { get set }
+    var isCancelled: Bool { get set }
 }
 
 // MARK: - Item
@@ -312,7 +340,7 @@ public protocol ItemProtocol: Document {
     var order: Relation<Order> { get set }
     var product: Relation<Product> { get set }
     var sku: Relation<SKU> { get set }
-    var isCanceled: Bool { get }
+    var isCancelled: Bool { get set }
 }
 
 public enum TradableErrorCode: String {
