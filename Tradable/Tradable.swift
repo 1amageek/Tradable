@@ -303,7 +303,7 @@ public protocol OrderItemProtocol: Document {
     var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }
-    var prodcut: Relation<Product> { get set }
+    var product: Relation<Product> { get set }
     var sku: Relation<SKU> { get set }
     var quantity: Int { get set }
     var currency: Currency { get set }
