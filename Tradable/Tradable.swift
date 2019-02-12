@@ -340,7 +340,7 @@ public protocol ItemProtocol: Document {
     associatedtype Person: UserProtocol
     var selledBy: Relation<Person> { get set }
     var order: Relation<Order> { get set }
-    var product: Relation<Product> { get set }
+    var product: Reference<Product> { get set }
     var sku: Relation<SKU> { get set }
     var isCancelled: Bool { get set }
 }
