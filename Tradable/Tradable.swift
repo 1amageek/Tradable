@@ -116,7 +116,7 @@ public protocol TradeTransactionProtocol: Document {
     var selledBy: Relation<Person> { get set }
     var purchasedBy: Relation<Person> { get set }
     var order: Relation<Order> { get set }
-    var product: Relation<Product> { get set }
+    var product: Reference<Product> { get set }
     var sku: Relation<SKU> { get set }
     var inventoryStocks: [String] { get set }
     var items: [String] { get set }
@@ -135,7 +135,6 @@ public enum BalanceTransactionType: String {
 }
 
 public protocol BalanceTransactionProtocol: Document {
-    associatedtype Product: ProductProtocol
     associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
@@ -249,7 +248,7 @@ public protocol SKUProtocol: Document {
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var currency: Currency { get set }
-    var product: Relation<Product> { get set }
+    var product: Reference<Product> { get set }
     var amount: Int { get set }
     var unitSales: Int { get set }
     var inventory: Inventory { get set }
@@ -303,7 +302,7 @@ public protocol OrderItemProtocol: Document {
     var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }
-    var product: Relation<Product> { get set }
+    var product: Reference<Product> { get set }
     var sku: Relation<SKU> { get set }
     var quantity: Int { get set }
     var currency: Currency { get set }
