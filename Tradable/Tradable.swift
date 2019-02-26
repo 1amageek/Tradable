@@ -207,6 +207,11 @@ public class Inventory: NSObject {
         self.quantity = quantity
     }
 
+    public init(type: StockType, value: StockValue) {
+        self.type = type
+        self.value = value
+    }
+
     public convenience override init() {
         self.init(type: .finite, quantity: 0)
     }
