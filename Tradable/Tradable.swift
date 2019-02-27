@@ -305,6 +305,7 @@ public protocol OrderItemProtocol: Document {
     associatedtype Person: UserProtocol
     var order: Relation<Order> { get set }
     var purchasedBy: Relation<Person> { get set }
+    var createdBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }
     var product: Reference<Product> { get set }
