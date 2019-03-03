@@ -11,7 +11,6 @@ import FirebaseAuth
 import Pring
 
 public protocol Tradable {
-    associatedtype Product: ProductProtocol
     associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
@@ -116,7 +115,7 @@ public protocol TradeTransactionProtocol: Document {
     var selledBy: Relation<Person> { get set }
     var purchasedBy: Relation<Person> { get set }
     var order: Relation<Order> { get set }
-    var product: Reference<Product> { get set }
+    var product: DocumentReference { get set }
     var sku: Relation<SKU> { get set }
     var inventoryStocks: [String] { get set }
     var items: [String] { get set }
@@ -253,7 +252,7 @@ public protocol SKUProtocol: Document {
     var selledBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
     var currency: Currency { get set }
-    var product: Reference<Product> { get set }
+    var product: DocumentReference { get set }
     var amount: Int { get set }
     var unitSales: Int { get set }
     var inventory: Inventory { get set }
@@ -300,7 +299,6 @@ public enum OrderPaymentStatus: String {
 
 public protocol OrderItemProtocol: Document {
     associatedtype SKU: SKUProtocol
-    associatedtype Product: ProductProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var order: Relation<Order> { get set }
@@ -308,7 +306,7 @@ public protocol OrderItemProtocol: Document {
     var createdBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
     var type: OrderItemType { get set }
-    var product: Reference<Product> { get set }
+    var product: DocumentReference { get set }
     var sku: Relation<SKU> { get set }
     var quantity: Int { get set }
     var currency: Currency { get set }
@@ -339,13 +337,12 @@ public protocol OrderProtocol: Document {
 // MARK: - Item
 
 public protocol ItemProtocol: Document {
-    associatedtype Product: ProductProtocol
     associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var selledBy: Relation<Person> { get set }
     var order: Relation<Order> { get set }
-    var product: Reference<Product> { get set }
+    var product: DocumentReference { get set }
     var sku: Relation<SKU> { get set }
     var isCancelled: Bool { get set }
 }
