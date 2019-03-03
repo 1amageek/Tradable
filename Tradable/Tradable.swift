@@ -106,7 +106,6 @@ public enum TradeTransactionType: String {
 }
 
 public protocol TradeTransactionProtocol: Document {
-    associatedtype Product: ProductProtocol
     associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
