@@ -257,7 +257,7 @@ public protocol SKUProtocol: Document {
     var inventory: Inventory { get set }
     var isPublished: Bool { get set }
     var isAvailabled: Bool { get set }
-    var numberOfFetchCount: Int { get set }
+    var numberOfFetch: Int { get set }
     var inventoryStocks: NestedCollection<InventoryStock> { get set }
 }
 
