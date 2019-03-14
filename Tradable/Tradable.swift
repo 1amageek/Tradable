@@ -317,6 +317,8 @@ public protocol OrderProtocol: Document {
     associatedtype OrderItem: OrderItemProtocol
     associatedtype Person: UserProtocol
     associatedtype Address: AddressProtocol
+    var title: String? { get set }
+    var assets: [File] { get set }
     var parentID: String? { get set }
     var purchasedBy: Relation<Person> { get set }
     var selledBy: Relation<Person> { get set }
