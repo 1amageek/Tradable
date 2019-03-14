@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Tradable"
-  s.version      = "0.8.1"
+  s.version      = "0.8.2"
   s.summary      = "Firestore trade framework"
   s.description  = <<-DESC
 Tradable is a library for doing business.
