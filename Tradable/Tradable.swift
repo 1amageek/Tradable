@@ -300,6 +300,8 @@ public protocol OrderItemProtocol: Document {
     associatedtype SKU: SKUProtocol
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
+    var name: String? { get set }
+    var thumbnailImage: File? { get set }
     var order: Relation<Order> { get set }
     var purchasedBy: Relation<Person> { get set }
     var createdBy: Relation<Person> { get set }
