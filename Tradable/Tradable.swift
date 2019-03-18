@@ -116,7 +116,7 @@ public protocol TradeTransactionProtocol: Document {
     var product: DocumentReference? { get set }
     var sku: Relation<SKU> { get set }
     var inventoryStock: String? { get set }
-    var item: DocumentReference { get set }
+    var item: DocumentReference? { get set }
 }
 
 // MARK: - BalanceTransaction
