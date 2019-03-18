@@ -110,14 +110,13 @@ public protocol TradeTransactionProtocol: Document {
     associatedtype Order: OrderProtocol
     associatedtype Person: UserProtocol
     var type: TradeTransactionType { get set }
-    var quantity: Int { get set }
     var selledBy: Relation<Person> { get set }
     var purchasedBy: Relation<Person> { get set }
     var order: Relation<Order> { get set }
     var product: DocumentReference? { get set }
     var sku: Relation<SKU> { get set }
-    var inventoryStocks: [String] { get set }
-    var items: [String] { get set }
+    var inventoryStock: String? { get set }
+    var item: DocumentReference { get set }
 }
 
 // MARK: - BalanceTransaction
