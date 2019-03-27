@@ -283,7 +283,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TradableTests/Pods-TradableTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TradableTests/Pods-TradableTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -306,7 +306,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TradableTests/Pods-TradableTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TradableTests/Pods-TradableTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		209B3F0DAA5E8DF921DCBA4D /* [CP] Check Pods Manifest.lock */ = {

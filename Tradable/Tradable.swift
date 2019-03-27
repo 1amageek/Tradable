@@ -10,16 +10,6 @@ import FirebaseFirestore
 import FirebaseAuth
 import Pring
 
-public protocol Tradable {
-    associatedtype SKU: SKUProtocol
-    associatedtype Order: OrderProtocol
-    associatedtype Person: UserProtocol
-    var isAvailabled: Bool { get set }
-    var country: String { get set }
-    var orders: DataSource<Order>.Query { get }
-    var orderings: DataSource<Order>.Query { get }
-}
-
 // MARK: - User
 
 public protocol UserProtocol: Document {
